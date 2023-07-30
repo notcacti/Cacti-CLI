@@ -1,0 +1,19 @@
+{
+  "name": "cacti-cli",
+  "version": "1.2.1",
+  "description": "This is a javascript cli that eases the creation of discord bots and express APIs using typescript.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": "index.js",
+  "keywords": [],
+  "author": "notcacti (discord)",
+  "license": "ISC",
+  "dependencies": {
+    "chalk-animation": "^2.0.3",
+    "inquirer": "^9.2.8",
+    "nanospinner": "^1.1.0"
+  }
+}
