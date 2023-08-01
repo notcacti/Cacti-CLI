@@ -19,6 +19,7 @@ async function getType() {
         choices: [
             "Express with Typescript",
             "DiscordBot using Typescript",
+            "Any NodeJS project using Typescript"
         ],
         message: "What do you want to generate?"
     });
@@ -33,6 +34,9 @@ async function callFunc() {
             break;
         case "DiscordBot using Typescript":
             await discordTs();
+            break;
+        case "Any NodeJS project using Typescript":
+            await anyNode();
             break;
     }
 }
@@ -581,6 +585,148 @@ export default ready;
 
     const rainbowTitle = chalkAnimation.rainbow (
         'Successfully setup a discord bot using typescript!',
+    );
+
+    await sleep(3000);
+
+    rainbowTitle.stop();
+}
+
+async function anyNode() {
+    let projectName;
+
+    async function getName() {
+        const answers = await inquirer.prompt({
+            name: "proj_name",
+            type: "input",
+            message: "What should the project be called?",
+            default() {
+                return 'untitled';
+            }
+        });
+
+        projectName = answers.proj_name;
+    }
+
+    async function setupFolders() {
+        const spinner = createSpinner('Setting up folder structure...').start();
+
+        try {
+            if (fs.existsSync(`./${projectName}`)) {
+                spinner.error({ text: "That directory seems to already exist!" })
+                process.exit(1);
+            }
+
+            await sleep();
+
+            fs.mkdirSync(`./${projectName}`);
+            fs.mkdirSync(`./${projectName}/src`);
+
+            spinner.success({ text: 'Successfully setup folder structure' });
+        } catch (err) {
+            spinner.error({ text: `Error: ${err}` });
+            process.exit(1);
+        }
+    }
+
+    async function initPackages() {
+        const spinner = createSpinner('Initialising node project...').start();
+
+        await sleep();
+        exec('npm init -y', { cwd: `./${projectName}` }, (err, stdout, stderr) => {   
+            if (err !== null) {
+                console.log(err);
+                spinner.error({ text: "An error occured while initialising the project!" });
+                process.exit(1);
+            }
+        });
+
+        spinner.success({ text: 'Successfully initalised the project!' });
+    }
+
+    async function installPackages() {
+        const spinner = createSpinner('Installing all dependencies...').start();
+
+        await sleep();
+
+        exec('npm i -D @types/node typescript rimraf nodemon', { cwd: `./${projectName}` }, (err, stdout, stderr) => {   
+            if (err !== null) {
+                console.log(err);
+                spinner.error({ text: "An error occured while installing dev dependencies!" });
+                process.exit(1);
+            }
+        });
+
+        spinner.success({ text: "Successfully installed all dependencies"});
+    }
+
+    async function initTypescript() {
+        const spinner = createSpinner('Initialising typescript...').start();
+
+        await sleep();
+
+        try {
+            await writeFile(`./${projectName}/tsconfig.json`, `{
+    "compilerOptions": {
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext",
+        "target": "ES2020",
+        "sourceMap": true,
+        "outDir": "dist",
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+    },
+    "include": ["src/**/*"]
+}`).then(() => {});
+        } catch (err) {
+            spinner.error({ text: `Error while initialising typescript: ${err}` });
+            process.exit(1);
+        }
+
+        spinner.success({ text: "Successfully initialised typescript!" });
+    }
+
+    async function finalEdits() {
+        const spinner = createSpinner('Doing final touches...').start();
+
+        await sleep();
+
+        try {
+            const filePath = `./${projectName}/package.json`;
+            const jsonData = await readFile(filePath, 'utf8');
+            const packageJson = await JSON.parse(jsonData);
+
+            packageJson.scripts = {
+                build: "rimraf ./dist/ && tsc",
+                predev: "npm run build",
+                dev: "tsc -w & nodemon ./dist/index.js",
+                prestart: "npm run build",
+                start: "node ./dist/index.js"
+            }
+
+            packageJson['type'] = "module";
+            packageJson['main'] = "./dist/index.js";
+
+            await writeFile(`./${projectName}/package.json`, JSON.stringify(packageJson, null, 2));
+
+            await writeFile(`./${projectName}/src/index.ts`, `// run "npm start" to start (or) "npm run dev" for hot reloads.\nconsole.log('Hello, World!');`);
+        } catch (err) {
+            spinner.error({ text: `Error while doing final touches: ${err}` });
+            process.exit(1);
+        }
+
+        spinner.success({ text: "Successfully completed final edits!" });
+    }
+
+    await getName();
+    await setupFolders();
+    await initPackages();
+    await installPackages();
+    await initTypescript();
+    await finalEdits();
+
+    const rainbowTitle = chalkAnimation.rainbow (
+        'Successfully setup a NodeJS Project using typescript!',
     );
 
     await sleep(3000);
