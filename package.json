@@ -1,6 +1,6 @@
 {
   "name": "cacti-cli",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "A Command Line Interface created for the ease of creation of discord bots, express servers and regular projects.",
   "main": "index.js",
   "type": "module",

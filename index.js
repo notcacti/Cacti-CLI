@@ -8,7 +8,7 @@ import { writeFile, readFile, mkdir } from "fs/promises";
 
 const exec = (await import('child_process')).exec;
 
-const sleep = (ms = 500) => new Promise((r) => setTimeout(r, ms));
+const sleep = (ms = 1000) => new Promise((r) => setTimeout(r, ms));
 
 let prompt;
 let language;
