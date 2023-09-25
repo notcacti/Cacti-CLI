@@ -1,0 +1,8 @@
+{
+  "tabWidth": 4,
+  "importOrder": ["^[./]"],
+  "importOrderSeparation": false,
+  "importOrderSortSpecifiers": false,
+  "semi": true,
+  "singleQuote": false
+}

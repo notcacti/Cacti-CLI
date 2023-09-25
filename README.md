@@ -23,9 +23,10 @@ npx cacti-cli
 The CLI will guide you through the process of generating different types of projects. Here's how it works:
 
 1. Choose the type of project you want to generate:
-   - `ExpressJS Server`
-   - `Discord-Bot`
-   - `Any NodeJS Project`
+
+    - `ExpressJS Server`
+    - `Discord Bot`
+    - `Any NodeJS Project`
 
 2. Answer whether you want to use `TypeScript` (Y/n).
 
@@ -40,7 +41,8 @@ To create a Discord bot project, run the following command:
 ```bash
 npx cacti-cli
 ```
-Select "Discord-Bot" as the project type and answer the prompts. You can choose to use TypeScript (Y/n) and then enter the name of your project.
+
+Select "Discord Bot" as the project type and answer the prompts. You can choose to use TypeScript (Y/n), select the framework and then enter the name of your project.
 
 The CLI will set up your Discord bot project, whether in TypeScript or JavaScript, according to your selections.
 
@@ -50,4 +52,4 @@ Contributions to Cacti CLI are welcome! If you encounter any issues, have sugges
 
 ## License
 
-This project is open source and available under the ``MIT License``.
+This project is open source and available under the `MIT License`.

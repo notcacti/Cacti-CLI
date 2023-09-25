@@ -1,19 +1,19 @@
 {
-  "name": "cacti-cli",
-  "version": "2.0.2",
-  "description": "A Command Line Interface created for the ease of creation of discord bots, express servers and regular projects.",
-  "main": "index.js",
-  "type": "module",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "bin": "index.js",
-  "keywords": [],
-  "author": "notcacti (discord)",
-  "license": "ISC",
-  "dependencies": {
-    "chalk-animation": "^2.0.3",
-    "inquirer": "^9.2.8",
-    "nanospinner": "^1.1.0"
-  }
+    "name": "cacti-cli",
+    "version": "2.1.0",
+    "description": "A Command Line Interface created for the ease of creation of discord bots, express servers and regular projects.",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "bin": "index.js",
+    "keywords": [],
+    "author": "notcacti (discord)",
+    "license": "ISC",
+    "dependencies": {
+        "chalk-animation": "^2.0.3",
+        "inquirer": "^9.2.8",
+        "nanospinner": "^1.1.0"
+    }
 }
